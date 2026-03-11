@@ -1,10 +1,11 @@
 from telegram import Update
 from youtube import channel_handle, channel_info, view_count, sub_count, video_count, thumbnail
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
-
+from dotenv import load_dotenv
+import os
 # Start making bot commands
 
-
+load_dotenv()
 async def start(update:Update, *args):
     await update.message.reply_text(f"Welcome to the YT Bot, don't forget to subscribe to {channel_handle}")
 
@@ -26,7 +27,7 @@ async def handle_messages(update:Update, *args):
     await update.message.reply_text("As a youtube chatbot, my job is to provide information about your channel, not engage in meaningless conversations with you")
 
 if __name__ == "__main__":
-    api_token = "7602831168:AAEz9U3Hx2_a-rGvnJMsYNGUJ4zqlpHOgwI"
+    api_token = os.getenv("YOUTUBE_TOKEN")
 
     app = Application.builder().token(api_token).build()
 
